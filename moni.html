@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For You ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        #lockScreen {
+            margin-top: 150px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background: white;
+            color: #ff4d6d;
+        }
+
+        #no {
+            background: #ff4d6d;
+            color: white;
+            position: absolute;
+        }
+
+        .container {
+            display: none;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+
+        #typing {
+            font-size: 22px;
+            margin: 10px;
+            min-height: 40px;
+        }
+
+        #quote {
+            font-size: 20px;
+            margin: 20px;
+            height: 60px;
+        }
+
+        #question {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+
+        #final {
+            display: none;
+            margin-top: 120px;
+            font-size: 28px;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔐 Lock Screen -->
+<div id="lockScreen">
+    <h1>🔒 Secret For You</h1>
+    <p>Enter the password to unlock my heart 💖</p>
+
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Unlock ❤️</button>
+
+    <p id="error"></p>
+</div>
+
+<!-- 💖 Main Content -->
+<div class="container">
+    <h1>Hey My Love ❤️</h1>
+
+    <div id="typing"></div>
+    <div id="quote"></div>
+
+    <div id="question">
+        Will you stay with me forever? 💖
+    </div>
+
+    <button id="yes" onclick="yesClick()">Yes ❤️</button>
+    <button id="no" onmouseover="moveNo()">No 😒</button>
+</div>
+
+<div id="final">
+    💕 I knew it… you are my forever ❤️ <br><br>
+    You are my happiness, my peace, my everything 💖  
+    <br><br>
+    I promise to love you more every single day 💕
+</div>
+
+<script>
+    // 🔐 Password check
+    function checkPassword() {
+        const pass = document.getElementById("password").value;
+
+        if (pass === "172106") { // 👈 CHANGE PASSWORD HERE
+            document.getElementById("lockScreen").style.display = "none";
+            document.querySelector(".container").style.display = "block";
+        } else {
+            document.getElementById("error").innerText = "Wrong password 😒 Try again!";
+        }
+    }
+
+    // Typing effect
+    const text = "I may not be perfect… but my love for you is always real 🥺❤️";
+    let i = 0;
+
+    function typing() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 50);
+        }
+    }
+
+    // Quotes
+    const quotes = [
+        "You are my peace in this chaotic world 💖",
+        "Every moment without you feels incomplete 🥺",
+        "I just want you… always you 💕",
+        "You are my favorite notification 😄",
+        "My heart always chooses you ❤️",
+        "You are my safe place 🥺",
+        "I fall for you more every single day 💖",
+        "You are my today and all my tomorrows 💕"
+    ];
+
+    function updateQuote() {
+        const random = Math.floor(Math.random() * quotes.length);
+        document.getElementById("quote").innerText = quotes[random];
+    }
+
+    setInterval(updateQuote, 3000);
+
+    // Move NO button
+    function moveNo() {
+        const btn = document.getElementById("no");
+        btn.style.top = Math.random() * window.innerHeight + "px";
+        btn.style.left = Math.random() * window.innerWidth + "px";
+    }
+
+    // Final message
+    function yesClick() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("final").style.display = "block";
+    }
+
+    // Floating hearts
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
